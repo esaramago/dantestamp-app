@@ -142,7 +142,7 @@ const onSubmit = async () => {
     method: 'POST',
     request: {
       name: order.name,
-      productId: product.id,
+      productId: product.value.id,
     }
   })
 

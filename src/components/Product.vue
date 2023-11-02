@@ -20,7 +20,7 @@ import '@shoelace-style/shoelace/dist/components/card/card.js'
 const mediaUrl = import.meta.env.VITE_MEDIA_URL
 
 const props = defineProps({
-  id: Number | String,
+  id: Number, String,
   imageUrl: String,
   name: {
     type: String,
