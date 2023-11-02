@@ -1,0 +1,11 @@
+body {
+  font-size: var(--sl-font-size-medium);
+  font-family: var(--sl-font-serif);
+}
+legend {
+  font-weight: 700;
+  margin-bottom: var(--sl-spacing-x-small);
+}
+main {
+  padding-bottom: var(--sl-spacing-4x-large) !important;
+}

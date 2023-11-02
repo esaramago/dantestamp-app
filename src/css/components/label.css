@@ -1,0 +1,7 @@
+.label {
+  display: inline-block;
+  margin-bottom: var(--sl-spacing-3x-small);
+  color: var(--sl-input-label-color);
+  font-size: var(--sl-input-label-font-size-medium);
+  font-weight: 400;
+}

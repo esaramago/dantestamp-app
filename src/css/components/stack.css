@@ -1,0 +1,8 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sl-spacing-large) var(--sl-spacing-x-large);
+}
+.stack--small {
+  gap: var(--sl-spacing-small) var(--sl-spacing-medium);
+}

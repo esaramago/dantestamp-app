@@ -1,0 +1,12 @@
+.u-text-right {
+  text-align: right;
+}
+.u-align-end {
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .u-half--desktop {
+    width: 50%;
+  }
+}

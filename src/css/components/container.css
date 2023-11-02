@@ -1,0 +1,5 @@
+.container {
+  max-width: 80rem;
+  margin: auto;
+  padding: var(--sl-spacing-2x-large);
+}

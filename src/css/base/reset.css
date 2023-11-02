@@ -1,0 +1,25 @@
+body,
+h1,
+h2,
+h3,
+h4,
+ul,
+p,
+button,
+fieldset,
+legend {
+  margin: 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+button {
+  background: none;
+  font-size: inherit;
+  font-weight: inherit;
+}
+fieldset {
+  padding: 0;
+  border: none;
+}

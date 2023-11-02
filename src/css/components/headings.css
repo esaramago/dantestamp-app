@@ -1,0 +1,10 @@
+.h-2 {
+  font-size: var(--sl-font-size-large);
+}
+.h-3 {
+  font-size: var(--sl-font-size-medium);
+}
+.h-4 {
+  font-size: var(--sl-font-size-medium);
+  color: var(--sl-color-neutral-500);
+}
