@@ -45,6 +45,9 @@ sl-card .product::part(base) {
 sl-card .product::part(body) {
   padding: 0;
 }
+.product {
+  max-width: 25rem;
+}
 .product::part(base) {
   height: 100%;
 }
