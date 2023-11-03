@@ -32,11 +32,19 @@
               label="Nome"
               v-model="order.name"
               class="u-half--desktop"
+              :required="true"
             ></sl-input>
             <sl-input
               label="Email"
               v-model="order.email"
               type="email"
+              class="u-half--desktop"
+              :required="true"
+            ></sl-input>
+            <sl-input
+              label="Contacto telefónico"
+              v-model="order.phone"
+              type="tel"
               class="u-half--desktop"
             ></sl-input>
 
@@ -46,6 +54,7 @@
                 name="country"
                 v-model="order.isPortugal"
                 @sl-change="onChangeCountry"
+                :required="true"
               >
                 <sl-radio :value="true">Portugal</sl-radio>
                 <sl-radio :value="false">Outro</sl-radio>
@@ -55,15 +64,32 @@
               label="Morada"
               placeholder="Rua, porta, andar"
               v-model="order.address"
+              :required="true"
             ></sl-input>
 
             <div class="g-row">
               <fieldset class="g-row g-row--small g-row--end">
                 <legend class="label">Código Postal</legend>
-                <sl-input class="zip-code-1" v-model="order.zipCode.one" inputmode="numeric" maxlength="4"></sl-input>
-                <sl-input class="zip-code-2" v-model="order.zipCode.two" inputmode="numeric" maxlength="3"></sl-input>
+                <sl-input
+                  class="zip-code-1"
+                  v-model="order.zipCode.one"
+                  inputmode="numeric"
+                  maxlength="4"
+                  :required="true"
+                ></sl-input>
+                <sl-input
+                  class="zip-code-2"
+                  v-model="order.zipCode.two"
+                  inputmode="numeric"
+                  maxlength="3"
+                  :required="true"
+                ></sl-input>
               </fieldset>
-              <sl-input label="Localidade" v-model="order.zipCode.location"></sl-input>
+              <sl-input
+                label="Localidade"
+                v-model="order.zipCode.location"
+                :required="true"
+              ></sl-input>
             </div>
 
             <div slot="footer" class="g-row g-row--center">
@@ -137,11 +163,18 @@ const onChangeCountry = (e) => {
 }
 
 const onSubmit = async () => {
+  debugger
   await useFetchApi({
     endpoint: `orders`,
     method: 'POST',
     request: {
       name: order.name,
+      email: order.email,
+      isPortugal: order.isPortugal,
+      address: order.address,
+      zipCode1: order.zipCode.one,
+      zipCode2: order.zipCode.two,
+      location: order.zipCode.location,
       productId: product.value.id,
     }
   })
