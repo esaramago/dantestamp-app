@@ -1,5 +1,10 @@
 .container {
-  max-width: 80rem;
+  max-width: 60rem;
   margin: auto;
   padding: var(--sl-spacing-2x-large);
+}
+@media (max-width: 600px) {
+  .container {
+    padding: var(--sl-spacing-x-large);
+  }
 }

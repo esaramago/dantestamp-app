@@ -21,6 +21,9 @@ export async function useFetchApi(options) {
       }
     })
     .then((response) => {
+      if (options.success) {
+        options.success(response.data)
+      }
       return response.data
     })
 

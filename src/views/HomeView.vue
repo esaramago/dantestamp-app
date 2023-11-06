@@ -17,46 +17,49 @@
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi molestiae tempore minus deserunt facilis pariatur tempora. Numquam possimus accusantium, alias adipisci nobis nesciunt ab quo accusamus placeat corrupti neque fuga!</p>
         <div class="g-row">
           <sl-button variant="primary" size="large" @click="scrollTo">Loja</sl-button>
-          <sl-button variant="primary" size="large">Personalizar</sl-button>
+          <!-- <sl-button variant="primary" size="large">Personalizar</sl-button> -->
         </div>
       </div>
     </div>
 
   </div>
-  <main class="container stack">
-    <h2 class="h-1" id="store">Loja</h2>
+  <main>
+    <div class="container stack">
+      <h2 class="h-1" id="store">Loja</h2>
 
-    <div class="store">
-      <!--<div class="store__filters stack stack--small">
-        <h3 class="h-4">Filtros</h3>
-        <form>
-          <fieldset>
-            <legend>Temas</legend>
-            <div class="checkbox-group">
-              <sl-checkbox checked>Mapas</sl-checkbox>
-              <sl-checkbox checked>Natureza</sl-checkbox>
-              <sl-checkbox checked>Pessoas</sl-checkbox>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Disponibilidade</legend>
-            <div class="checkbox-group">
-              <sl-checkbox checked>Mostrar vendidos</sl-checkbox>
-            </div>
-          </fieldset>
-        </form>
-      </div>-->
-      <div class="store__products">
-        <Product
-          v-for="product of products"
-          :key="product.id"
-          :id="product.id"
-          :image-url="product.thumbnailUrl"
-          :name="product.title"
-          :price="product.price"
-          :width="product.width"
-          :height="product.height"
-        ></Product>
+      <div class="store">
+        <!--<div class="store__filters stack stack--small">
+          <h3 class="h-4">Filtros</h3>
+          <form>
+            <fieldset>
+              <legend>Temas</legend>
+              <div class="checkbox-group">
+                <sl-checkbox checked>Mapas</sl-checkbox>
+                <sl-checkbox checked>Natureza</sl-checkbox>
+                <sl-checkbox checked>Pessoas</sl-checkbox>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Disponibilidade</legend>
+              <div class="checkbox-group">
+                <sl-checkbox checked>Mostrar vendidos</sl-checkbox>
+              </div>
+            </fieldset>
+          </form>
+        </div>-->
+        <div class="store__products">
+          <Product
+            v-for="product of products"
+            :key="product.id"
+            :id="product.id"
+            :image-url="product.thumbnailUrl"
+            :is-available="product.isAvailable"
+            :name="product.title"
+            :price="product.price"
+            :width="product.width"
+            :height="product.height"
+          ></Product>
+        </div>
       </div>
     </div>
   </main>
@@ -91,7 +94,8 @@
           price: product.attributes.price,
           width: product.attributes.width,
           height: product.attributes.height,
-          thumbnailUrl: product.attributes.thumbnail ? product.attributes.thumbnail.data.attributes.url : '',
+          isAvailable: product.attributes.isAvailable,
+          thumbnailUrl: product.attributes.thumbnail.data ? product.attributes.thumbnail.data.attributes.url : '',
         }
       })
 
@@ -115,7 +119,9 @@
 
 <style>
 .intro {
-  background-color: var(--sl-color-secondary-100);
+  position: relative;
+  background-color: var(--sl-color-primary-50);
+  box-shadow: inset 0 0 .5rem rgba(0,0,0,0.2);
 }
 .intro__container {
   align-items: center;
@@ -214,7 +220,7 @@
 .store__products {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   grid-template-rows: min-content;
   gap: var(--sl-spacing-3x-large);
 }

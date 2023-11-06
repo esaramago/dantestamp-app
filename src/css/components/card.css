@@ -1,8 +1,0 @@
-sl-card::part(image) {
-  border-bottom: 1px solid var(--border-color);
-}
-sl-card img {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: top;
-}
