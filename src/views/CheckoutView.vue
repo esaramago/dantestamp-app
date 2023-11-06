@@ -25,7 +25,7 @@
             </div>
           </sl-card>
         </aside>
-        <form @submit.prevent="onSubmit" class="g-col--full">
+        <form id="form" @submit.prevent="onSubmit" class="g-col--full">
           <sl-card class="form">
             <h2 class="h-2">Envio</h2>
             <sl-input
@@ -56,8 +56,8 @@
                 @sl-change="onChangeCountry"
                 :required="true"
               >
-                <sl-radio :value="true">Portugal</sl-radio>
-                <sl-radio :value="false">Outro</sl-radio>
+                <sl-radio value="pt">Portugal</sl-radio>
+                <sl-radio value="other">Outro</sl-radio>
               </sl-radio-group>
             </fieldset>
             <sl-input
@@ -69,7 +69,7 @@
 
             <div class="g-row">
               <fieldset class="g-row g-row--small g-row--end">
-                <legend class="label">Código Postal</legend>
+                <legend class="label label--required">Código Postal</legend>
                 <sl-input
                   class="zip-code-1"
                   v-model="order.zipCode.one"
@@ -93,8 +93,8 @@
             </div>
 
             <div slot="footer" class="g-row g-row--center">
-              <p class="g-col--full">Ao encomendar, receberá um email com as instruções de pagamento.</p>
-              <sl-button variant="primary" type="submit">Encomendar</sl-button>
+              <p class="g-col--full">Ao comprar, receberá um email com as instruções de pagamento.</p>
+              <sl-button variant="primary" type="submit">Comprar</sl-button>
             </div>
           </sl-card>
         </form>
@@ -159,27 +159,39 @@ const order = reactive({
 })
 
 const onChangeCountry = (e) => {
-  order.isPortugal = e.currentTarget.value
+  order.isPortugal = e.currentTarget.value === 'pt'
+}
+
+const validate = () => {
+  const isValid = document.getElementById('form').noValidate
+  return isValid
 }
 
 const onSubmit = async () => {
-  debugger
-  await useFetchApi({
-    endpoint: `orders`,
-    method: 'POST',
-    request: {
-      name: order.name,
-      email: order.email,
-      isPortugal: order.isPortugal,
-      address: order.address,
-      zipCode1: order.zipCode.one,
-      zipCode2: order.zipCode.two,
-      location: order.zipCode.location,
-      productId: product.value.id,
-    }
-  })
 
-  router.push('/')
+  const request = {
+    name: order.name,
+    email: order.email,
+    phone: order.phone,
+    isPortugal: order.isPortugal,
+    address: order.address,
+    zipCode1: order.zipCode.one,
+    zipCode2: order.zipCode.two,
+    location: order.zipCode.location,
+    productId: product.value.id,
+  }
+
+  if (validate(request)) {
+
+    await useFetchApi({
+      endpoint: `orders`,
+      method: 'POST',
+      request,
+    })
+
+    router.push('/')
+
+  }
 }
 
 </script>

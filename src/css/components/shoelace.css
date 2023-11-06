@@ -1,0 +1,19 @@
+/* Form */
+[required]::part(form-control-label)::after {
+  color: var(--sl-color-danger-500);
+  font-weight: bold;
+}
+[data-invalid]::part(base),
+[data-invalid] sl-radio::part(control) {
+  border-color: var(--sl-color-danger-500);
+}
+
+/* Card */
+sl-card::part(image) {
+  border-bottom: 1px solid var(--border-color);
+}
+sl-card img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: top;
+}

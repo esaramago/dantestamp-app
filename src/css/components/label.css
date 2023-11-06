@@ -5,3 +5,8 @@
   font-size: var(--sl-input-label-font-size-medium);
   font-weight: 400;
 }
+.label--required::after {
+  content: " *";
+  color: var(--sl-color-danger-500);
+  font-weight: bold;
+}

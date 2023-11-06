@@ -52,6 +52,7 @@
           :key="product.id"
           :id="product.id"
           :image-url="product.thumbnailUrl"
+          :is-available="product.isAvailable"
           :name="product.title"
           :price="product.price"
           :width="product.width"
@@ -91,7 +92,8 @@
           price: product.attributes.price,
           width: product.attributes.width,
           height: product.attributes.height,
-          thumbnailUrl: product.attributes.thumbnail ? product.attributes.thumbnail.data.attributes.url : '',
+          isAvailable: product.attributes.isAvailable,
+          thumbnailUrl: product.attributes.thumbnail.data ? product.attributes.thumbnail.data.attributes.url : '',
         }
       })
 

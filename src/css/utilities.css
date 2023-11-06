@@ -5,6 +5,10 @@
   align-items: end;
 }
 
+.u-strikethrough {
+  text-decoration: line-through;
+}
+
 @media (min-width: 900px) {
   .u-half--desktop {
     width: 50%;

@@ -5,9 +5,12 @@
     <h4 class="name">{{ props.name }}</h4>
     <template v-if="props.width && props.height">{{props.width}} x {{props.height}} cm</template>
     <div class="price" v-if="props.price">{{props.price}}</div>
+    <span class="not-available" v-if="!props.isAvailable">Não disponível</span>
+
     <div slot="footer" class="u-text-right" v-if="props.showButton">
       <RouterLink :to="`/checkout?id=${props.id}`">
-        <sl-button variant="primary">Comprar</sl-button>
+        <sl-button variant="primary" v-if="props.isAvailable">Comprar</sl-button>
+        <sl-button variant="secondary" v-else>Encomendar</sl-button>
       </RouterLink>
     </div>
   </sl-card>
@@ -29,7 +32,10 @@ const props = defineProps({
   width: Number,
   height: Number,
   price: Number,
-  isAvailable: Boolean,
+  isAvailable: {
+    type: Boolean,
+    default: true
+  },
   showButton: {
     type: Boolean,
     default: true,
@@ -67,6 +73,10 @@ sl-card .product::part(body) {
   font-size: var(--sl-font-size-large);
   font-weight: 700;
   line-height: 1;
+}
+.not-available {
+  color: var(--sl-color-danger-500);
+  font-weight: bold;
 }
 sl-card::part(footer) {
   text-align: right;

@@ -2,7 +2,7 @@
 @import './base/reset.css';
 @import './base/base.css';
 
-@import './components/card.css';
+@import './components/shoelace.css';
 @import './components/checkbox-group.css';
 @import './components/container.css';
 @import './components/grid.css';
