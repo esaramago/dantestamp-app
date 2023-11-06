@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: var(--sl-color-primary-500);
+  color: var(--sl-color-neutral-900);
 
 }
 sl-icon {

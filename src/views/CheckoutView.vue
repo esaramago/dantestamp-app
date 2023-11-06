@@ -1,11 +1,14 @@
 <template>
   <main>
     <div class="container stack">
-      <Back to="/">Comprar</Back>
+      <Back to="/">
+        <template v-if="order.isAvailable">Comprar</template>
+        <template v-else>Encomendar</template>
+      </Back>
       <div class="g-row g-row--nowrap g-row--desktop g-row--reverse">
         <aside class="resume stack stack--small">
           <sl-card>
-            <h2 class="h-2 is-visually-hidden">Resumo da compra</h2>
+            <h2 class="h-2 is-visually-hidden">Resumo da <template v-if="order.isAvailable">compra</template><template v-else>encomenda</template></h2>
             <Product
               :id="product.id"
               :image-url="product.thumbnailUrl"
@@ -27,7 +30,7 @@
         </aside>
         <form id="form" @submit.prevent="onSubmit">
           <sl-card class="form">
-            <h2 class="h-2">Envio</h2>
+            <h2 class="h-2">Dados de envio</h2>
             <sl-input
               label="Nome"
               v-model="order.name"
@@ -94,8 +97,12 @@
             </div>
 
             <div slot="footer" class="g-row g-row--center g-row--nowrap">
-              <p class="u-font-small">Ao comprar, receberá um email com as instruções de pagamento.</p>
-              <sl-button class="g-col--auto" variant="primary" type="submit">Comprar</sl-button>
+              <p class="u-font-small">
+                Ao <template v-if="order.isAvailable">comprar</template><template v-else>encomendar</template>, receberá um email com as instruções de pagamento.</p>
+              <sl-button class="g-col--auto" variant="primary" type="submit">
+                <template v-if="order.isAvailable">Comprar</template>
+                <template v-else>Encomendar</template>
+              </sl-button>
             </div>
           </sl-card>
         </form>

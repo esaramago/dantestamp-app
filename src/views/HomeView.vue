@@ -17,7 +17,7 @@
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi molestiae tempore minus deserunt facilis pariatur tempora. Numquam possimus accusantium, alias adipisci nobis nesciunt ab quo accusamus placeat corrupti neque fuga!</p>
         <div class="g-row">
           <sl-button variant="primary" size="large" @click="scrollTo">Loja</sl-button>
-          <sl-button variant="primary" size="large">Personalizar</sl-button>
+          <!-- <sl-button variant="primary" size="large">Personalizar</sl-button> -->
         </div>
       </div>
     </div>
