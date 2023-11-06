@@ -3,17 +3,42 @@
   color: var(--sl-color-danger-500);
   font-weight: bold;
 }
-[data-invalid]::part(base),
-[data-invalid] sl-radio::part(control) {
+[data-user-invalid]::part(base),
+[data-user-invalid] sl-radio::part(control) {
   border-color: var(--sl-color-danger-500);
 }
 
 /* Card */
-sl-card::part(image) {
-  border-bottom: 1px solid var(--border-color);
-}
 sl-card img {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: top;
+}
+
+
+.sl-scroll-lock {
+  padding-right: var(--sl-scroll-lock-size) !important;
+  overflow: hidden !important;
+}
+
+.sl-toast-stack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  inset-inline-end: 0;
+  z-index: var(--sl-z-index-toast);
+  width: 28rem;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.sl-toast-stack sl-alert {
+  margin: var(--sl-spacing-medium);
+}
+
+.sl-toast-stack sl-alert::part(base) {
+  box-shadow: var(--sl-shadow-large);
 }

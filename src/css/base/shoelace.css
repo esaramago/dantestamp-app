@@ -245,7 +245,7 @@
    */
 
   /* Primary */
-  --sl-color-primary-50: #FFD4C7;
+  --sl-color-primary-50: #fff0e7;
   --sl-color-primary-100: #FFD4C7;
   --sl-color-primary-200: #E87350;
   --sl-color-primary-300: #E87350;
@@ -256,9 +256,6 @@
   --sl-color-primary-800: var(--sl-color-sky-800);
   --sl-color-primary-900: var(--sl-color-sky-900);
   --sl-color-primary-950: var(--sl-color-sky-950);
-
-  /* Secondary */
-  --sl-color-secondary-100: #FFF2D9;
 
   /* Success */
   --sl-color-success-50: var(--sl-color-green-50);

@@ -1,11 +1,11 @@
 <template>
   <main>
     <div class="container stack">
-      <h1 class="h-1">Comprar</h1>
+      <Back to="/">Comprar</Back>
       <div class="g-row g-row--nowrap g-row--desktop g-row--reverse">
         <aside class="resume stack stack--small">
           <sl-card>
-            <h2 class="h-2">Resumo da compra</h2>
+            <h2 class="h-2 is-visually-hidden">Resumo da compra</h2>
             <Product
               :id="product.id"
               :image-url="product.thumbnailUrl"
@@ -25,7 +25,7 @@
             </div>
           </sl-card>
         </aside>
-        <form id="form" @submit.prevent="onSubmit" class="g-col--full">
+        <form id="form" @submit.prevent="onSubmit">
           <sl-card class="form">
             <h2 class="h-2">Envio</h2>
             <sl-input
@@ -34,25 +34,26 @@
               class="u-half--desktop"
               :required="true"
             ></sl-input>
-            <sl-input
-              label="Email"
-              v-model="order.email"
-              type="email"
-              class="u-half--desktop"
-              :required="true"
-            ></sl-input>
-            <sl-input
-              label="Contacto telefónico"
-              v-model="order.phone"
-              type="tel"
-              class="u-half--desktop"
-            ></sl-input>
+
+            <div class="g-row">
+              <sl-input
+                label="Email"
+                v-model="order.email"
+                type="email"
+                :required="true"
+              ></sl-input>
+              <sl-input
+                label="Contacto telefónico"
+                v-model="order.phone"
+                type="tel"
+              ></sl-input>
+            </div>
 
             <fieldset>
               <sl-radio-group
                 label="País de envio"
                 name="country"
-                v-model="order.isPortugal"
+                v-model="order.country"
                 @sl-change="onChangeCountry"
                 :required="true"
               >
@@ -68,7 +69,7 @@
             ></sl-input>
 
             <div class="g-row">
-              <fieldset class="g-row g-row--small g-row--end">
+              <fieldset class="g-col--auto g-row g-row--small g-row--end">
                 <legend class="label label--required">Código Postal</legend>
                 <sl-input
                   class="zip-code-1"
@@ -92,15 +93,22 @@
               ></sl-input>
             </div>
 
-            <div slot="footer" class="g-row g-row--center">
-              <p class="g-col--full">Ao comprar, receberá um email com as instruções de pagamento.</p>
-              <sl-button variant="primary" type="submit">Comprar</sl-button>
+            <div slot="footer" class="g-row g-row--center g-row--nowrap">
+              <p class="u-font-small">Ao comprar, receberá um email com as instruções de pagamento.</p>
+              <sl-button class="g-col--auto" variant="primary" type="submit">Comprar</sl-button>
             </div>
           </sl-card>
         </form>
       </div>
     </div>
   </main>
+
+  <div class="sl-toast-stack">
+    <sl-alert id="errorToast" variant="error" closable>
+      <sl-icon slot="icon" name="check"></sl-icon>
+      Não foi possível fazer a compra. Tente novamente, por favor.
+    </sl-alert>
+  </div>
 </template>
 
 <script setup>
@@ -110,7 +118,10 @@ import '@shoelace-style/shoelace/dist/components/input/input.js'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js'
 import '@shoelace-style/shoelace/dist/components/radio/radio.js'
+import '@shoelace-style/shoelace/dist/components/alert/alert.js'
+import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 import Product from '@/components/Product.vue'
+import Back from '@/components/Back.vue'
 import { useFetchApi } from '@/composables/fetchApi'
 
 const route = useRoute()
@@ -149,6 +160,8 @@ initProduct.get()
 const order = reactive({
   name: '',
   email: '',
+  phone: null,
+  country: 'pt',
   isPortugal: true,
   address: '',
   zipCode: {
@@ -162,34 +175,35 @@ const onChangeCountry = (e) => {
   order.isPortugal = e.currentTarget.value === 'pt'
 }
 
-const validate = () => {
-  const isValid = document.getElementById('form').noValidate
-  return isValid
-}
+const onSubmit = async (e) => {
 
-const onSubmit = async () => {
+  const isFormValid = e.currentTarget.reportValidity()
 
-  const request = {
-    name: order.name,
-    email: order.email,
-    phone: order.phone,
-    isPortugal: order.isPortugal,
-    address: order.address,
-    zipCode1: order.zipCode.one,
-    zipCode2: order.zipCode.two,
-    location: order.zipCode.location,
-    productId: product.value.id,
-  }
+  if (isFormValid) {
 
-  if (validate(request)) {
+    const request = {
+      name: order.name,
+      email: order.email,
+      phone: order.phone,
+      isPortugal: order.isPortugal,
+      address: order.address,
+      zipCode1: order.zipCode.one,
+      zipCode2: order.zipCode.two,
+      location: order.zipCode.location,
+      productId: product.value.id,
+    }
 
     await useFetchApi({
       endpoint: `orders`,
       method: 'POST',
       request,
+      success: _response => {
+        router.push(`/?alert=success`)
+      },
+      error: _error => {
+        document.getElementById('errorToast').toast()
+      }
     })
-
-    router.push('/')
 
   }
 }
@@ -242,7 +256,7 @@ main {
 
 @media (min-width: 901px) {
   .resume {
-    max-width: 15rem;
+    max-width: 20rem;
   }
 }
 </style>

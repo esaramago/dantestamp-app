@@ -1,5 +1,9 @@
+.h-1 {
+  font-size: var(--sl-font-size-2x-large);
+  line-height: 1;
+}
 .h-2 {
-  font-size: var(--sl-font-size-large);
+  font-size: var(--sl-font-size-x-large);
 }
 .h-3 {
   font-size: var(--sl-font-size-medium);

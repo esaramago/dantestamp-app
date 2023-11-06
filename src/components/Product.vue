@@ -52,13 +52,17 @@ sl-card .product::part(body) {
   padding: 0;
 }
 .product {
-  max-width: 25rem;
+  --border-width: 0;
+  border: 1px solid var(--border-color);
+}
+sl-card .product {
+  border: none;
 }
 .product::part(base) {
   height: 100%;
 }
 .product:not(.--has-image)::part(image) {
-  background-color: var(--sl-color-secondary-100);
+  background-color: var(--sl-color-primary-50);
 }
 .product:not(.--has-image) img {
   position: relative;
@@ -68,6 +72,11 @@ sl-card .product::part(body) {
 .product::part(body) {
   flex-grow: 1;
 }
+.product::part(footer) {
+  border: none;
+  padding-top: 0
+}
+
 .name {
   flex-grow: 1;
   font-size: var(--sl-font-size-large);
