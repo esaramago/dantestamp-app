@@ -2,13 +2,13 @@
   <main>
     <div class="container stack">
       <Back to="/">
-        <template v-if="order.isAvailable">Comprar</template>
+        <template v-if="product.isAvailable">Comprar</template>
         <template v-else>Encomendar</template>
       </Back>
       <div class="g-row g-row--nowrap g-row--desktop g-row--reverse">
         <aside class="resume stack stack--small">
           <sl-card>
-            <h2 class="h-2 is-visually-hidden">Resumo da <template v-if="order.isAvailable">compra</template><template v-else>encomenda</template></h2>
+            <h2 class="h-2 is-visually-hidden">Resumo da <template v-if="product.isAvailable">compra</template><template v-else>encomenda</template></h2>
             <Product
               :id="product.id"
               :image-url="product.thumbnailUrl"
@@ -97,10 +97,10 @@
             </div>
 
             <div slot="footer" class="g-row g-row--center g-row--nowrap">
-              <p class="u-font-small">
-                Ao <template v-if="order.isAvailable">comprar</template><template v-else>encomendar</template>, receberá um email com as instruções de pagamento.</p>
+              <p class="u-font-small" v-if="product.isAvailable">Ao comprar, receberá um email com as instruções de pagamento.</p>
+              <p class="u-font-small" v-else>Esta obra não está disponível porque já foi vendida. Pode encomendar uma semelhante, feita só para si.</p>
               <sl-button class="g-col--auto" variant="primary" type="submit">
-                <template v-if="order.isAvailable">Comprar</template>
+                <template v-if="product.isAvailable">Comprar</template>
                 <template v-else>Encomendar</template>
               </sl-button>
             </div>
@@ -152,6 +152,7 @@ const initProduct = (function() {
         price: data.data.attributes.price,
         width: data.data.attributes.width,
         height: data.data.attributes.height,
+        isAvailable: data.data.attributes.isAvailable,
         thumbnailUrl: data.data.attributes.thumbnail ? data.data.attributes.thumbnail.data.attributes.url : '',
       }
     }
@@ -204,10 +205,10 @@ const onSubmit = async (e) => {
       endpoint: `orders`,
       method: 'POST',
       request,
-      success: _response => {
+      success: () => {
         router.push(`/?alert=success`)
       },
-      error: _error => {
+      error: () => {
         document.getElementById('errorToast').toast()
       }
     })

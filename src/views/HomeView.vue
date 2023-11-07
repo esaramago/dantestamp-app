@@ -14,10 +14,13 @@
           <h1>DanteStamp</h1>
           <h2>Arte com selos</h2>
         </div>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi molestiae tempore minus deserunt facilis pariatur tempora. Numquam possimus accusantium, alias adipisci nobis nesciunt ab quo accusamus placeat corrupti neque fuga!</p>
+        <div>
+          <p>Dante Stamp é o nome destas criativas e únicas obras de arte feitas com selos postais usados.<br>Todos os selos têm a sua história. Essas histórias estão imortalizadas nas obras Dante Stamp.</p>
+          <p>Tem a oportunidade de aquirir aqui uma obra original Dante Stamp. Pode também</p>
+        </div>
         <div class="g-row">
           <sl-button variant="primary" size="large" @click="scrollTo">Loja</sl-button>
-          <!-- <sl-button variant="primary" size="large">Personalizar</sl-button> -->
+          <sl-button variant="primary" size="large" href="mailto:dantestampart@gmail.com?subject=Pedido à medida">Pedido à medida</sl-button>
         </div>
       </div>
     </div>
@@ -234,5 +237,9 @@
     flex-direction: row;
     gap: var(--sl-spacing-3x-large);
   }
+}
+
+p {
+  margin-block-end: var(--sl-spacing-small);
 }
 </style>

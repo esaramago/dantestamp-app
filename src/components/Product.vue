@@ -2,7 +2,9 @@
   <sl-card class="product" :class="{'--has-image': props.imageUrl}">
     <img slot="image" v-if="props.imageUrl" :src="`${mediaUrl}${props.imageUrl}`" :alt="props.name" loading="lazy">
     <img slot="image" v-else src="@/assets/dante.png" alt="DanteStamp" loading="lazy">
-    <h4 class="name">{{ props.name }}</h4>
+    <h4 class="name">
+      <RouterLink :to="`/checkout?id=${props.id}`" title="Comprar">{{ props.name }}</RouterLink>
+    </h4>
     <template v-if="props.width && props.height">{{props.width}} x {{props.height}} cm</template>
     <div class="price" v-if="props.price">{{props.price}}</div>
     <span class="not-available" v-if="!props.isAvailable">Não disponível</span>
@@ -82,6 +84,13 @@ sl-card .product {
   font-size: var(--sl-font-size-large);
   font-weight: 700;
   line-height: 1;
+}
+.name a {
+  text-decoration: none;
+  color: var(--sl-color-neutral-900);
+}
+.name a:hover {
+  text-decoration: underline;
 }
 .not-available {
   color: var(--sl-color-danger-500);

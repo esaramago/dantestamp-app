@@ -372,8 +372,8 @@
 
   /* Font sizes */
   --sl-font-size-2x-small: 0.75rem; /* 12px */
-  --sl-font-size-x-small: 0.875rem; /* 14px */
-  --sl-font-size-small: 1rem; /* 16px */
+  --sl-font-size-x-small: 0.9rem;
+  --sl-font-size-small: 1.05rem;
   --sl-font-size-medium: 1.25rem; /* 20px */
   --sl-font-size-large: 1.5rem; /* 24px */
   --sl-font-size-x-large: 2.25rem; /* 36px */
