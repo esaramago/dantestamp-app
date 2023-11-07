@@ -6,7 +6,9 @@
       <RouterLink :to="`/checkout?id=${props.id}`" title="Comprar">{{ props.name }}</RouterLink>
     </h4>
     <template v-if="props.width && props.height">{{props.width}} x {{props.height}} cm</template>
-    <div class="price" v-if="props.price">{{props.price}}</div>
+    <div>
+      <Price v-if="props.price" :value="props.price"></Price>
+    </div>
     <span class="not-available" v-if="!props.isAvailable">Não disponível</span>
 
     <div slot="footer" class="u-text-right" v-if="props.showButton">
@@ -21,11 +23,12 @@
 <script setup>
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
+import Price from '@/components/Price.vue'
 
 const mediaUrl = import.meta.env.VITE_MEDIA_URL
 
 const props = defineProps({
-  id: Number, String,
+  id: Number,
   imageUrl: String,
   name: {
     type: String,
@@ -81,13 +84,12 @@ sl-card .product {
 
 .name {
   flex-grow: 1;
-  font-size: var(--sl-font-size-large);
+  font-size: var(--sl-font-size-medium);
   font-weight: 700;
-  line-height: 1;
 }
 .name a {
   text-decoration: none;
-  color: var(--sl-color-neutral-900);
+  color: inherit;
 }
 .name a:hover {
   text-decoration: underline;

@@ -20,11 +20,11 @@
             ></Product>
             <div>
               Portes de envio
-              <div class="price">0</div>
+              <Price :value="0"></Price>
             </div>
             <div class="u-text-right">
               <span>Total: </span>
-              <span class="price price--large">{{product.price}}</span>
+              <Price size="lg" :value="product.price"></Price>
             </div>
           </sl-card>
         </aside>
@@ -129,6 +129,7 @@ import '@shoelace-style/shoelace/dist/components/alert/alert.js'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 import Product from '@/components/Product.vue'
 import Back from '@/components/Back.vue'
+import Price from '@/components/Price.vue'
 import { useFetchApi } from '@/composables/fetchApi'
 
 const route = useRoute()

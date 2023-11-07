@@ -11,12 +11,12 @@
 
       <div class="intro__content">
         <div>
-          <h1>DanteStamp</h1>
-          <h2>Arte com selos</h2>
+          <Logo></Logo>
         </div>
         <div>
-          <p>Dante Stamp é o nome destas criativas e únicas obras de arte feitas com selos postais usados.<br>Todos os selos têm a sua história. Essas histórias estão imortalizadas nas obras Dante Stamp.</p>
-          <p>Tem a oportunidade de aquirir aqui uma obra original Dante Stamp. Pode também</p>
+          <p>DanteStamp é o nome destas criativas e únicas obras de arte feitas com selos postais usados.</p>
+          <p>Todos os selos têm a sua história. Essas histórias estão imortalizadas nas obras DanteStamp.</p>
+          <p>Tem a oportunidade de aquirir na loja uma obra original DanteStamp ou fazer uma pedido à medida.</p>
         </div>
         <div class="g-row">
           <sl-button variant="primary" size="large" @click="scrollTo">Loja</sl-button>
@@ -73,6 +73,7 @@
   import '@shoelace-style/shoelace/dist/components/button/button.js'
   import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js'
   import Product from '@/components/Product.vue'
+  import Logo from '@/components/Logo.vue'
   import { useFetchApi } from '@/composables/fetchApi'
 
   const products = ref([])
@@ -128,7 +129,7 @@
 }
 .intro__container {
   align-items: center;
-  gap: var(--sl-spacing-4x-large);
+  gap: var(--sl-spacing-3x-large);
 }
 @media (min-width: 900px) {
   .intro__container {
@@ -138,7 +139,7 @@
 
 
 .intro__stamp {
-  max-width: 30rem;
+  max-width: 26rem;
   position: relative;
   margin: auto;
   aspect-ratio: 1/1;
