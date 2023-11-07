@@ -71,7 +71,7 @@ header {
 .header__logo {
   display: flex;
   align-items: center;
-  width: 12rem;
+  width: 14rem;
 }
 
 nav {
