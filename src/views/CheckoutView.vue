@@ -32,18 +32,10 @@
         <form id="form" @submit.prevent="onSubmit">
           <sl-card class="form">
             <h2 class="h-2">Dados de envio</h2>
-            <sl-input
-              label="Nome"
-              v-model="order.name"
-              class="u-half--desktop"
-              :required="true"
-            ></sl-input>
-
             <div class="g-row">
               <sl-input
-                label="Email"
-                v-model="order.email"
-                type="email"
+                label="Nome"
+                v-model="order.name"
                 :required="true"
               ></sl-input>
               <sl-input
@@ -51,6 +43,15 @@
                 v-model="order.phone"
                 type="tel"
               ></sl-input>
+            </div>
+
+            <div class="g-row">
+              <!-- <sl-input
+                label="Email"
+                v-model="order.email"
+                type="email"
+                :required="true"
+              ></sl-input> -->
             </div>
 
             <fieldset>
@@ -97,10 +98,22 @@
               ></sl-input>
             </div>
 
+            <sl-textarea id="message" label="Mensagem"></sl-textarea>
+
             <div slot="footer" class="g-row g-row--center g-row--nowrap">
               <p class="u-font-small" v-if="product.isAvailable">Ao comprar, receberá um email com as instruções de pagamento.</p>
               <p class="u-font-small" v-else>Esta obra não está disponível porque já foi vendida. Pode encomendar uma semelhante, feita só para si.</p>
-              <sl-button class="g-col--auto" variant="primary" type="submit">
+              <sl-button
+                class="g-col--auto"
+                variant="primary"
+                :href="`
+                  mailto:dantestampart@gmail.com?subject=${product.isAvailable !== false ? 'Compra' : 'Encomenda'}&body=
+                    Nome: ${order.name}%0D%0A
+                    Telefone: ${order.phone}%0D%0A
+                    Morada: ${order.address}, ${order.zipCode.one}-${order.zipCode.two} ${order.zipCode.location}%0D%0A
+                    Mensagem: ${order.message}
+                `"
+              >
                 <template v-if="product.isAvailable">Comprar</template>
                 <template v-else>Encomendar</template>
               </sl-button>
