@@ -1,9 +1,8 @@
 <template>
-  <sl-card class="product" :class="{'--has-image': props.imageUrl}">
-    <img slot="image" v-if="props.imageUrl" :src="`${mediaUrl}${props.imageUrl}`" :alt="props.name" loading="lazy">
-    <img slot="image" v-else src="@/assets/dante.png" alt="DanteStamp" loading="lazy">
+  <sl-card class="product">
+    <img slot="image" :src="`media/products/${props.slug}.jpg`" :alt="props.title" loading="lazy">
     <h4 class="name">
-      <RouterLink :to="`/checkout?id=${props.id}`" title="Comprar">{{ props.name }}</RouterLink>
+      <RouterLink :to="`/checkout?id=${props.id}`" title="Comprar">{{ props.title }}</RouterLink>
     </h4>
     <template v-if="props.width && props.height">{{props.width}} x {{props.height}} cm</template>
     <div>
@@ -25,12 +24,10 @@ import '@shoelace-style/shoelace/dist/components/button/button.js'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 import Price from '@/components/Price.vue'
 
-const mediaUrl = import.meta.env.VITE_MEDIA_URL
-
 const props = defineProps({
   id: Number,
-  imageUrl: String,
-  name: {
+  slug: String,
+  title: {
     type: String,
     default: 'Sem título'
   },
@@ -65,14 +62,6 @@ sl-card .product {
 }
 .product::part(base) {
   height: 100%;
-}
-.product:not(.--has-image)::part(image) {
-  background-color: var(--sl-color-primary-50);
-}
-.product:not(.--has-image) img {
-  position: relative;
-  opacity: .2;
-  filter: grayscale(1);
 }
 .product::part(body) {
   flex-grow: 1;

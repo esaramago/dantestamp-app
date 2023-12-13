@@ -11,11 +11,12 @@
             <h2 class="h-2 is-visually-hidden">Resumo da <template v-if="product.isAvailable">compra</template><template v-else>encomenda</template></h2>
             <Product
               :id="product.id"
-              :image-url="product.thumbnailUrl"
-              :name="product.title"
+              :slug="product.slug"
+              :title="product.title"
               :price="product.price"
               :width="product.width"
               :height="product.height"
+              :is-available="product.isAvailable"
               :show-button="false"
             ></Product>
             <div>
@@ -61,7 +62,7 @@
                 :required="true"
               >
                 <sl-radio value="pt">Portugal</sl-radio>
-                <sl-radio value="other">Outro</sl-radio>
+                <sl-radio value="other" disabled>Outro</sl-radio>
               </sl-radio-group>
             </fieldset>
             <sl-input
@@ -121,12 +122,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import '@shoelace-style/shoelace/dist/components/input/input.js'
-import '@shoelace-style/shoelace/dist/components/card/card.js'
-import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js'
-import '@shoelace-style/shoelace/dist/components/radio/radio.js'
-import '@shoelace-style/shoelace/dist/components/alert/alert.js'
-import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 import Product from '@/components/Product.vue'
 import Back from '@/components/Back.vue'
 import Price from '@/components/Price.vue'
@@ -141,22 +136,20 @@ const initProduct = (function() {
   const productId = route.query.id
 
   async function getProduct() {
-    const data = await useFetchApi({
-      endpoint: `products/${productId}?populate=*`
-    })
-
-    if (data) {
-
-      product.value = {
-        id: data.data.id,
-        title: data.data.attributes.title,
-        price: data.data.attributes.price,
-        width: data.data.attributes.width,
-        height: data.data.attributes.height,
-        isAvailable: data.data.attributes.isAvailable,
-        thumbnailUrl: data.data.attributes.thumbnail ? data.data.attributes.thumbnail.data.attributes.url : '',
+    await useFetchApi({
+      endpoint: `products/${productId}`,
+      success: data => {
+        product.value = {
+          id: data.id,
+          title: data.title,
+          slug: data.slug,
+          price: data.price || null,
+          width: data.width,
+          height: data.height,
+          isAvailable: data.isAvailable !== false
+        }
       }
-    }
+    })
 
   }
   return {
@@ -203,7 +196,7 @@ const onSubmit = async (e) => {
     }
 
     await useFetchApi({
-      endpoint: `orders`,
+      endpoint: '',
       method: 'POST',
       request,
       success: () => {

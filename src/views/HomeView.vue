@@ -55,9 +55,9 @@
             v-for="product of products"
             :key="product.id"
             :id="product.id"
-            :image-url="product.thumbnailUrl"
+            :slug="product.slug"
             :is-available="product.isAvailable"
-            :name="product.title"
+            :title="product.title"
             :price="product.price"
             :width="product.width"
             :height="product.height"
@@ -70,8 +70,6 @@
 
 <script setup>
   import { ref } from 'vue'
-  import '@shoelace-style/shoelace/dist/components/button/button.js'
-  import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js'
   import Product from '@/components/Product.vue'
   import Logo from '@/components/Logo.vue'
   import { useFetchApi } from '@/composables/fetchApi'
@@ -79,37 +77,31 @@
   const products = ref([])
   const Products = (function() {
 
-    async function getImages() {
-      return await useFetchApi({
-        endpoint: ''
-      })
-    }
-
     async function getProducts() {
-      const result = await useFetchApi({
-        endpoint: 'products?populate=*'
-      })
+      useFetchApi({
+        endpoint: 'products',
+        success: result => {
 
-      const productsData = result.data.map(product => {
+          const productsData = result.map(product => {
+            return {
+              id: product.id,
+              title: product.title,
+              slug: product.slug,
+              price: product.price || null,
+              width: product.width,
+              height: product.height,
+              isAvailable: product.isAvailable,
+            }
+          })
 
-        return {
-          id: product.id,
-          title: product.attributes.title,
-          price: product.attributes.price,
-          width: product.attributes.width,
-          height: product.attributes.height,
-          isAvailable: product.attributes.isAvailable,
-          thumbnailUrl: product.attributes.thumbnail.data ? product.attributes.thumbnail.data.attributes.url : '',
+          products.value = productsData
         }
       })
-
-      products.value = productsData
 
     }
 
     return {
-      get: getProducts,
-      getImages,
+      get: getProducts
     }
 
   })()
