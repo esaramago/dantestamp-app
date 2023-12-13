@@ -11,11 +11,12 @@
             <h2 class="h-2 is-visually-hidden">Resumo da <template v-if="product.isAvailable">compra</template><template v-else>encomenda</template></h2>
             <Product
               :id="product.id"
-              :image-url="product.thumbnailUrl"
-              :name="product.title"
+              :slug="product.slug"
+              :title="product.title"
               :price="product.price"
               :width="product.width"
               :height="product.height"
+              :is-available="product.isAvailable"
               :show-button="false"
             ></Product>
             <div>
@@ -31,18 +32,10 @@
         <form id="form" @submit.prevent="onSubmit">
           <sl-card class="form">
             <h2 class="h-2">Dados de envio</h2>
-            <sl-input
-              label="Nome"
-              v-model="order.name"
-              class="u-half--desktop"
-              :required="true"
-            ></sl-input>
-
             <div class="g-row">
               <sl-input
-                label="Email"
-                v-model="order.email"
-                type="email"
+                label="Nome"
+                v-model="order.name"
                 :required="true"
               ></sl-input>
               <sl-input
@@ -50,6 +43,15 @@
                 v-model="order.phone"
                 type="tel"
               ></sl-input>
+            </div>
+
+            <div class="g-row">
+              <!-- <sl-input
+                label="Email"
+                v-model="order.email"
+                type="email"
+                :required="true"
+              ></sl-input> -->
             </div>
 
             <fieldset>
@@ -61,7 +63,7 @@
                 :required="true"
               >
                 <sl-radio value="pt">Portugal</sl-radio>
-                <sl-radio value="other">Outro</sl-radio>
+                <sl-radio value="other" disabled>Outro</sl-radio>
               </sl-radio-group>
             </fieldset>
             <sl-input
@@ -96,10 +98,22 @@
               ></sl-input>
             </div>
 
+            <sl-textarea id="message" label="Mensagem"></sl-textarea>
+
             <div slot="footer" class="g-row g-row--center g-row--nowrap">
               <p class="u-font-small" v-if="product.isAvailable">Ao comprar, receberá um email com as instruções de pagamento.</p>
               <p class="u-font-small" v-else>Esta obra não está disponível porque já foi vendida. Pode encomendar uma semelhante, feita só para si.</p>
-              <sl-button class="g-col--auto" variant="primary" type="submit">
+              <sl-button
+                class="g-col--auto"
+                variant="primary"
+                :href="`
+                  mailto:dantestampart@gmail.com?subject=${product.isAvailable !== false ? 'Compra' : 'Encomenda'}&body=
+                    Nome: ${order.name}%0D%0A
+                    Telefone: ${order.phone}%0D%0A
+                    Morada: ${order.address}, ${order.zipCode.one}-${order.zipCode.two} ${order.zipCode.location}%0D%0A
+                    Mensagem: ${order.message}
+                `"
+              >
                 <template v-if="product.isAvailable">Comprar</template>
                 <template v-else>Encomendar</template>
               </sl-button>
@@ -121,12 +135,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import '@shoelace-style/shoelace/dist/components/input/input.js'
-import '@shoelace-style/shoelace/dist/components/card/card.js'
-import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js'
-import '@shoelace-style/shoelace/dist/components/radio/radio.js'
-import '@shoelace-style/shoelace/dist/components/alert/alert.js'
-import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 import Product from '@/components/Product.vue'
 import Back from '@/components/Back.vue'
 import Price from '@/components/Price.vue'
@@ -141,22 +149,20 @@ const initProduct = (function() {
   const productId = route.query.id
 
   async function getProduct() {
-    const data = await useFetchApi({
-      endpoint: `products/${productId}?populate=*`
-    })
-
-    if (data) {
-
-      product.value = {
-        id: data.data.id,
-        title: data.data.attributes.title,
-        price: data.data.attributes.price,
-        width: data.data.attributes.width,
-        height: data.data.attributes.height,
-        isAvailable: data.data.attributes.isAvailable,
-        thumbnailUrl: data.data.attributes.thumbnail ? data.data.attributes.thumbnail.data.attributes.url : '',
+    await useFetchApi({
+      endpoint: `products/${productId}`,
+      success: data => {
+        product.value = {
+          id: data.id,
+          title: data.title,
+          slug: data.slug,
+          price: data.price || null,
+          width: data.width,
+          height: data.height,
+          isAvailable: data.isAvailable !== false
+        }
       }
-    }
+    })
 
   }
   return {
@@ -203,7 +209,7 @@ const onSubmit = async (e) => {
     }
 
     await useFetchApi({
-      endpoint: `orders`,
+      endpoint: '',
       method: 'POST',
       request,
       success: () => {

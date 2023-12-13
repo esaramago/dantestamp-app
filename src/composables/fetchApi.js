@@ -1,30 +1,36 @@
 import axios from 'axios'
-const apiUrl = import.meta.env.VITE_API_URL
-const token = import.meta.env.VITE_API_TOKEN
 
 export async function useFetchApi(options) {
 
-  const endpoint = options.endpoint
-  const method = options.method || 'GET'
   const data = options.request ? { data: options.request } : null
 
-  if (!endpoint) return
+  if (!options.endpoint) return
+
+  const endpoint = options.endpoint.split('/')
+  const route = endpoint[0]
+  const id = endpoint[1]
 
   try {
     return axios({
-      method,
-      url: `${apiUrl}/${endpoint}`,
-      data,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer${token}`,
-      }
+      method: options.method || 'GET',
+      url: 'database.json',
+      data
     })
     .then((response) => {
-      if (options.success) {
-        options.success(response.data)
+      if (response.statusText === 'OK') {
+        const responseArray = response.data[route]
+        let responseData = null
+
+        if (responseArray && id) {
+          responseData = responseArray.find(x => x.id == id)
+        } else if (responseArray) {
+          responseData = responseArray
+        }
+        if (options.success) {
+          options.success(responseData)
+        }
+        return responseData
       }
-      return response.data
     })
 
   } catch (errors) {

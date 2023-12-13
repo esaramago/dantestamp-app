@@ -38,8 +38,6 @@
 <script setup>
 import { RouterView, useRoute, useRouter } from 'vue-router'
 import { watch } from 'vue'
-import '@shoelace-style/shoelace/dist/components/alert/alert.js'
-import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 
 const route = useRoute()
 const router = useRouter()

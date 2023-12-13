@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Camões",
+      "slug": "camoes",
+      "price": 20,
+      "width": 100,
+      "height": 100,
+      "isAvailable": true,
+      "categories": []
+    },
+    {
+      "id": 2,
+      "title": "Cuco Rabilongo",
+      "slug": "cuco-rabilongo",
+      "price": 25
+    },
+    {
+      "id": 3,
+      "title": "Dante Alighieri",
+      "slug": "dante-alighieri",
+      "price": 120
+    },
+    {
+      "id": 4,
+      "title": "Peppa",
+      "slug": "peppa",
+      "isAvailable": false
+    },
+    {
+      "id": 5,
+      "title": "Portugal em azulejos",
+      "slug": "portal-em-azulejos",
+      "price": 35
+    },
+    {
+      "id": 6,
+      "title": "Barbie",
+      "slug": "barbie",
+      "price": 40
+    }
+  ]
+}
