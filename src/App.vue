@@ -2,7 +2,7 @@
   <header>
     <div class="header container">
       <a href="/" class="header__logo">
-        <img alt="DanteStamp logo" src="@/img/logo.svg" width="231" loading="lazy" />
+        <img alt="DanteStamp logo" src="@/img/logo.jpg" width="231" loading="lazy" />
       </a>
       <nav>
         <a href="https://www.facebook.com/dantestamp" title="Facebook page">
