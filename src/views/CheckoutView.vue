@@ -138,7 +138,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Product from '@/components/Product.vue'
 import Back from '@/components/Back.vue'
 import Price from '@/components/Price.vue'
-import { useFetchApi } from '@/composables/fetchApi'
+import { useGetData } from '@/composables/getData'
 
 const route = useRoute()
 const router = useRouter()
@@ -149,7 +149,7 @@ const initProduct = (function() {
   const productId = route.query.id
 
   async function getProduct() {
-    await useFetchApi({
+    await useGetData({
       endpoint: `products/${productId}`,
       success: data => {
         product.value = {
@@ -208,7 +208,7 @@ const onSubmit = async (e) => {
       productId: product.value.id,
     }
 
-    await useFetchApi({
+    await useGetData({
       endpoint: '',
       method: 'POST',
       request,

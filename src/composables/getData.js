@@ -1,6 +1,6 @@
 import database from '../database.json' assert {type: 'json'}
 
-export async function useFetchApi(options) {
+export async function useGetData(options) {
 
   if (!options.endpoint) return
 
@@ -14,7 +14,11 @@ export async function useFetchApi(options) {
   if (responseArray && id) {
     responseData = responseArray.find(x => x.id == id)
   } else if (responseArray) {
-    responseData = responseArray
+    responseData = responseArray.sort((a, b) => {
+      if (a.id > b.id) return -1
+      if (a.id < b.id) return 1
+      return 0
+    })
   }
   options.success(responseData)
 }
