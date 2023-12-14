@@ -120,12 +120,13 @@
   box-shadow: inset 0 0 .5rem rgba(0,0,0,0.2);
 }
 .intro__container {
+  display: flex;
   align-items: center;
   gap: var(--sl-spacing-3x-large);
 }
-@media (min-width: 900px) {
+@media (max-width: 899px) {
   .intro__container {
-    display: flex;
+    flex-direction: column;
   }
 }
 
