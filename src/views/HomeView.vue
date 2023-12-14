@@ -5,9 +5,9 @@
 
         <div class="intro__stamp">
           <h1 class="is-visually-hidden">Dante Stamp</h1>
-          <img src="@/assets/postagestamp.svg" alt="Dante" loading="lazy">
+          <img src="@/img/postagestamp.svg" alt="Dante" loading="lazy">
           <div class="intro__image">
-            <img src="@/assets/dante.png" alt="Dante" loading="lazy">
+            <img src="@/img/dante.png" alt="Dante" loading="lazy">
           </div>
         </div>
 
