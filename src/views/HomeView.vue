@@ -1,32 +1,32 @@
 <template>
-  <div class="intro">
-    <div class="container intro__container">
-
-      <div class="intro__stamp">
-        <img src="@/assets/postagestamp.svg" alt="Dante" loading="lazy">
-        <div class="intro__image">
-          <img src="@/assets/dante.png" alt="Dante" loading="lazy">
-        </div>
-      </div>
-
-      <div class="intro__content">
-        <div>
-          <Logo></Logo>
-        </div>
-        <div>
-          <p>DanteStamp é o nome destas criativas e únicas obras de arte feitas com selos postais usados.</p>
-          <p>Todos os selos têm a sua história. Essas histórias estão imortalizadas nas obras DanteStamp.</p>
-          <p>Tem a oportunidade de aquirir na loja uma obra original DanteStamp ou fazer uma pedido à medida.</p>
-        </div>
-        <div class="g-row">
-          <sl-button variant="primary" size="large" @click="scrollTo">Loja</sl-button>
-          <sl-button variant="primary" size="large" href="mailto:dantestampart@gmail.com?subject=Pedido à medida">Pedido à medida</sl-button>
-        </div>
-      </div>
-    </div>
-
-  </div>
   <main>
+    <div class="intro">
+      <section class="container intro__container">
+
+        <div class="intro__stamp">
+          <h1 class="is-visually-hidden">Dante Stamp</h1>
+          <img src="@/img/postagestamp.svg" alt="Dante" loading="lazy">
+          <div class="intro__image">
+            <img src="@/img/dante.png" alt="Dante" loading="lazy">
+          </div>
+        </div>
+
+        <div class="intro__content">
+          <div>
+            <Logo></Logo>
+          </div>
+          <div>
+            <p>DanteStamp é o nome destas criativas e únicas obras de arte feitas com selos postais usados.</p>
+            <p>Todos os selos têm a sua história. Essas histórias estão imortalizadas nas obras DanteStamp.</p>
+            <p>Tem a oportunidade de aquirir na loja uma obra original DanteStamp ou fazer uma pedido à medida.</p>
+          </div>
+          <div class="g-row">
+            <sl-button variant="primary" size="large" @click="scrollTo">Loja</sl-button>
+            <sl-button variant="primary" size="large" href="mailto:dantestampart@gmail.com?subject=Pedido à medida">Pedido à medida</sl-button>
+          </div>
+        </div>
+      </section>
+    </div>
     <div class="container stack">
       <h2 class="h-1" id="store">Loja</h2>
 

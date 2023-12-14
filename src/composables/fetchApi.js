@@ -1,8 +1,6 @@
-import axios from 'axios'
+import database from '../database.json' assert {type: 'json'}
 
 export async function useFetchApi(options) {
-
-  const data = options.request ? { data: options.request } : null
 
   if (!options.endpoint) return
 
@@ -10,34 +8,13 @@ export async function useFetchApi(options) {
   const route = endpoint[0]
   const id = endpoint[1]
 
-  try {
-    return axios({
-      method: options.method || 'GET',
-      url: 'database.json',
-      data
-    })
-    .then((response) => {
-      if (response.statusText === 'OK') {
-        const responseArray = response.data[route]
-        let responseData = null
+  const responseArray = database[route]
+  let responseData = null
 
-        if (responseArray && id) {
-          responseData = responseArray.find(x => x.id == id)
-        } else if (responseArray) {
-          responseData = responseArray
-        }
-        if (options.success) {
-          options.success(responseData)
-        }
-        return responseData
-      }
-    })
-
-  } catch (errors) {
-    if (options.error) {
-      options.error(errors)
-    } else {
-      console.error(errors)
-    }
+  if (responseArray && id) {
+    responseData = responseArray.find(x => x.id == id)
+  } else if (responseArray) {
+    responseData = responseArray
   }
+  options.success(responseData)
 }

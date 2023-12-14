@@ -45,14 +45,14 @@
               ></sl-input>
             </div>
 
-            <div class="g-row">
-              <!-- <sl-input
+            <!-- <div class="g-row">
+              <sl-input
                 label="Email"
                 v-model="order.email"
                 type="email"
                 :required="true"
-              ></sl-input> -->
-            </div>
+              ></sl-input>
+            </div> -->
 
             <fieldset>
               <sl-radio-group

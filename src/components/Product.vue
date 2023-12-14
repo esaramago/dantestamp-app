@@ -1,9 +1,9 @@
 <template>
   <sl-card class="product">
     <img slot="image" :src="`media/products/${props.slug}.jpg`" :alt="props.title" loading="lazy">
-    <h4 class="name">
+    <h3 class="name">
       <RouterLink :to="`/checkout?id=${props.id}`" title="Comprar">{{ props.title }}</RouterLink>
-    </h4>
+    </h3>
     <template v-if="props.width && props.height">{{props.width}} x {{props.height}} cm</template>
     <div>
       <Price v-if="props.price" :value="props.price"></Price>
