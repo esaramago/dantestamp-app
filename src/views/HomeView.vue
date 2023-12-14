@@ -72,13 +72,13 @@
   import { ref } from 'vue'
   import Product from '@/components/Product.vue'
   import Logo from '@/components/Logo.vue'
-  import { useFetchApi } from '@/composables/fetchApi'
+  import { useGetData } from '@/composables/getData'
 
   const products = ref([])
   const Products = (function() {
 
     async function getProducts() {
-      useFetchApi({
+      useGetData({
         endpoint: 'products',
         success: result => {
 

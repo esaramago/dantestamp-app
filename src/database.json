@@ -14,7 +14,7 @@
       "id": 2,
       "title": "Cuco Rabilongo",
       "slug": "cuco-rabilongo",
-      "price": 25
+      "price": 30
     },
     {
       "id": 3,
@@ -39,6 +39,102 @@
       "title": "Barbie",
       "slug": "barbie",
       "price": 40
+    },
+    {
+      "id": 7,
+      "title": "Lisboa",
+      "slug": "lisboa",
+      "isAvailable": false
+    },
+    {
+      "id": 8,
+      "title": "gelado",
+      "slug": "gelado",
+      "price": 30
+    },
+    {
+      "id": 9,
+      "title": "Mapa Angola",
+      "slug": "mapa-angola",
+      "isAvailable": false
+    },
+    {
+      "id": 10,
+      "title": "Mapa Moçambique",
+      "slug": "mapa-mocambique",
+      "price": 30
+    },
+    {
+      "id": 11,
+      "title": "Portugal turístico",
+      "slug": "portugal-turistico",
+      "isAvailable": false
+    },
+    {
+      "id": 12,
+      "title": "Rostos de Portugal",
+      "slug": "rostos-portugal",
+      "price": 30
+    },
+    {
+      "id": 13,
+      "title": "Mapa França",
+      "slug": "mapa-franca",
+      "price": 30
+    },
+    {
+      "id": 14,
+      "title": "mapa França com Rainha Isabel",
+      "slug": "mapa-franca-2",
+      "price": 30
+    },
+    {
+      "id": 15,
+      "title": "Bandeira Palestina",
+      "slug": "bandeira-palestina",
+      "price": 30
+    },
+    {
+      "id": 16,
+      "title": "Bandeira Israel",
+      "slug": "bandeira-israel",
+      "price": 30
+    },
+    {
+      "id": 17,
+      "title": "Portugal",
+      "slug": "portugal",
+      "price": 30
+    },
+    {
+      "id": 18,
+      "title": "Portugal Turístico 2",
+      "slug": "portugal-turistico-2",
+      "price": 40
+    },
+    {
+      "id": 19,
+      "title": "Anjo",
+      "slug": "anjo",
+      "price": 30
+    },
+    {
+      "id": 20,
+      "title": "Bandeira LGBT",
+      "slug": "bandeira-lgbt",
+      "price": 30
+    },
+    {
+      "id": 21,
+      "title": "Portugal - Ferramentas",
+      "slug": "portugal-ferramentas",
+      "price": 30
+    },
+    {
+      "id": 22,
+      "title": "Árvore de Natal",
+      "slug": "arvore-natal",
+      "price": 30
     }
   ]
 }
